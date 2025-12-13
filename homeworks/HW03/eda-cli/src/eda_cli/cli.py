@@ -67,6 +67,9 @@ def report(
     sep: str = typer.Option(",", help="Разделитель в CSV."),
     encoding: str = typer.Option("utf-8", help="Кодировка файла."),
     max_hist_columns: int = typer.Option(6, help="Максимум числовых колонок для гистограмм."),
+    top_k_categories: int = typer.Option(5, help="Сколько top-значений выводить для категориальных признаков."),
+    title: str = typer.Option("EDA-отчёт", help="Заголовок отчёта."),
+    min_missing_share: float = typer.Option(0.1, help="Порог доли пропусков для выделения проблемных колонок."),
 ) -> None:
     """
     Сгенерировать полный EDA-отчёт:
@@ -85,11 +88,15 @@ def report(
     summary = summarize_dataset(df)
     summary_df = flatten_summary_for_print(summary)
     missing_df = missing_table(df)
+    problematic_missing_cols = missing_df[missing_df["missing_share"] >= min_missing_share].index.tolist()
     corr_df = correlation_matrix(df)
     top_cats = top_categories(df)
 
     # 2. Качество в целом
-    quality_flags = compute_quality_flags(summary, missing_df)
+    quality_flags = compute_quality_flags(df, summary, missing_df)
+
+    # 2.1 ДЗ
+    top_cats = top_categories(df, top_k=top_k_categories)
 
     # 3. Сохраняем табличные артефакты
     summary_df.to_csv(out_root / "summary.csv", index=False)
@@ -102,7 +109,7 @@ def report(
     # 4. Markdown-отчёт
     md_path = out_root / "report.md"
     with md_path.open("w", encoding="utf-8") as f:
-        f.write(f"# EDA-отчёт\n\n")
+        f.write(f"# {title}\n\n")
         f.write(f"Исходный файл: `{Path(path).name}`\n\n")
         f.write(f"Строк: **{summary.n_rows}**, столбцов: **{summary.n_cols}**\n\n")
 
@@ -115,6 +122,14 @@ def report(
 
         f.write("## Колонки\n\n")
         f.write("См. файл `summary.csv`.\n\n")
+
+        if problematic_missing_cols:
+            f.write("## Проблемные колонки (по пропускам)\n\n")
+            f.write(f"Порог: **{min_missing_share:.0%}**\n\n")
+            f.write("Следующие колонки имеют долю пропусков выше порога:\n")
+            for col in problematic_missing_cols:
+                f.write(f"- `{col}`: {missing_df.loc[col, 'missing_share']:.2%}\n")
+            f.write("\n")
 
         f.write("## Пропуски\n\n")
         if missing_df.empty:

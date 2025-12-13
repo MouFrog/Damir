@@ -44,7 +44,7 @@ def test_missing_table_and_quality_flags():
     assert missing_df.loc["age", "missing_count"] == 1
 
     summary = summarize_dataset(df)
-    flags = compute_quality_flags(summary, missing_df)
+    flags = compute_quality_flags(df, summary, missing_df)
     assert 0.0 <= flags["quality_score"] <= 1.0
 
 
@@ -59,3 +59,39 @@ def test_correlation_and_top_categories():
     city_table = top_cats["city"]
     assert "value" in city_table.columns
     assert len(city_table) <= 2
+
+def test_new_quality_heuristics():
+    # 1. Тест: has_constant_columns
+    df1 = pd.DataFrame({
+        "id": [1, 2, 3],
+        "status": ["active", "active", "active"],  # константная колонка
+        "value": [10, 20, 30]
+    })
+    summary1 = summarize_dataset(df1)
+    missing_df1 = missing_table(df1)
+    flags1 = compute_quality_flags(df1, summary1, missing_df1)
+    assert flags1["has_constant_columns"] == True
+
+    # 2. Тест: has_high_cardinality_categoricals
+    # Порог в коде — 20 (или 50, зависит от вашего значения)
+    # Создадим категориальную колонку с 25 уникальными значениями
+    df2 = pd.DataFrame({
+        "user_id": range(25),
+        "category": [f"cat_{i}" for i in range(25)]  # 25 уникальных — выше порога
+    })
+    summary2 = summarize_dataset(df2)
+    missing_df2 = missing_table(df2)
+    flags2 = compute_quality_flags(df2, summary2, missing_df2)
+    assert flags2["has_high_cardinality_categoricals"] == True
+
+    # 3. Дополнительно: проверка, что флаги = False, когда не должно быть проблем
+    df4 = pd.DataFrame({
+        "id": [1, 2, 3, 4],
+        "city": ["Moscow", "SPb", "Novosibirsk", "Kazan"],  # 4 уникальных — низкая кардинальность
+        "score": [1, 2, 3, 4]
+    })
+    summary4 = summarize_dataset(df4)
+    missing_df4 = missing_table(df4)
+    flags4 = compute_quality_flags(df4, summary4, missing_df4)
+    assert flags4["has_constant_columns"] == False
+    assert flags4["has_high_cardinality_categoricals"] == False

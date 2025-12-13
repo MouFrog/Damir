@@ -52,8 +52,27 @@ uv run eda-cli report data/example.csv --out-dir reports
 - `missing_matrix.png` – визуализация пропусков;
 - `correlation_heatmap.png` – тепловая карта корреляций.
 
+## HW03
+
+Команда report теперь поддерживает дополнительные параметры:
+
+--max-hist-columns – сколько числовых колонок включать в гистограммы (по умолчанию: 6);
+--top-k-categories – сколько top-значений выводить для категориальных признаков (по умолчанию: 5);
+--title – заголовок отчёта в report.md;
+--min-missing-share – порог доли пропусков (от 0 до 1), выше которого колонка считается проблемной.
+
 ## Тесты
 
 ```bash
 uv run pytest -q
+```
+
+## Пример вызова
+
+```bash
+uv run eda-cli report data/example.csv \
+  --out-dir my_report \
+  --title "Анализ пользователей" \
+  --top-k-categories 10 \
+  --min-missing-share 0.2
 ```

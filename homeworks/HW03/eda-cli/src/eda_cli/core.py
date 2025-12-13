@@ -170,7 +170,7 @@ def top_categories(
     return result
 
 
-def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> Dict[str, Any]:
+def compute_quality_flags(df: pd.DataFrame, summary: DatasetSummary, missing_df: pd.DataFrame) -> Dict[str, Any]:
     """
     Простейшие эвристики «качества» данных:
     - слишком много пропусков;
@@ -184,6 +184,16 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
     max_missing_share = float(missing_df["missing_share"].max()) if not missing_df.empty else 0.0
     flags["max_missing_share"] = max_missing_share
     flags["too_many_missing"] = max_missing_share > 0.5
+
+    has_constant_columns = any(col.unique == 1 and col.non_null > 0 for col in summary.columns)
+    flags["has_constant_columns"] = has_constant_columns
+
+    HIGH_CARDINALITY_THRESHOLD = 20
+    has_high_cardinality_categoricals = any(
+        not col.is_numeric and col.unique > HIGH_CARDINALITY_THRESHOLD and col.non_null > 0
+        for col in summary.columns
+    )
+    flags["has_high_cardinality_categoricals"] = has_high_cardinality_categoricals
 
     # Простейший «скор» качества
     score = 1.0
