@@ -1,0 +1,10 @@
+{
+  "best_model": "GradientBoosting",
+  "best_model_class": "GradientBoostingClassifier",
+  "test_metrics": {
+    "accuracy": 0.9256666666666666,
+    "f1": 0.8801719505642128,
+    "roc_auc": 0.9686232288862933
+  },
+  "selection_criterion": "roc_auc"
+}
