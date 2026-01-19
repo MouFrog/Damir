@@ -6,5 +6,5 @@
     "f1": 0.8801719505642128,
     "roc_auc": 0.9686232288862933
   },
-  "selection_criterion": "roc_auc"
+  "selection_criterion": "f1"
 }
