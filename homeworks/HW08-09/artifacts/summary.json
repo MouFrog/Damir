@@ -1,0 +1,9 @@
+{
+  "device": "cpu",
+  "train_size": 40000,
+  "val_size": 10000,
+  "test_size": 10000,
+  "test_accuracy": 0.5315,
+  "test_loss": 1.351429920578003,
+  "best_source": "E3"
+}

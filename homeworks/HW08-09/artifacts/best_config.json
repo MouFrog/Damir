@@ -1,0 +1,30 @@
+{
+  "dataset": "CIFAR10",
+  "seed": 42,
+  "device_used": "cpu",
+  "source_regularization_experiment": "E3",
+  "experiment_id": "E4",
+  "architecture": {
+    "hidden_sizes": [
+      256,
+      128
+    ],
+    "dropout": 0.0,
+    "batchnorm": true,
+    "activation": "ReLU"
+  },
+  "training": {
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "batch_size": 512,
+    "max_epochs": 15,
+    "early_stopping_patience": 4,
+    "weight_decay": 0.0
+  },
+  "metrics": {
+    "best_val_accuracy": 0.5378,
+    "best_val_loss": 1.3451826160430909,
+    "test_accuracy": 0.5315,
+    "test_loss": 1.351429920578003
+  }
+}
