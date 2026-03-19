@@ -19,12 +19,26 @@
     "batch_size": 512,
     "max_epochs": 15,
     "early_stopping_patience": 4,
-    "weight_decay": 0.0
+    "weight_decay": 0.0,
+    "loss": "CrossEntropyLoss",
+    "momentum": 0.0,
+    "epochs_trained": 12,
+    "early_stopping_metric": "val_accuracy"
   },
   "metrics": {
     "best_val_accuracy": 0.5378,
     "best_val_loss": 1.3451826160430909,
     "test_accuracy": 0.5315,
     "test_loss": 1.351429920578003
-  }
+  },
+  "loss": "CrossEntropyLoss",
+  "optimizer": "Adam",
+  "lr": 0.001,
+  "batch_size": 512,
+  "max_epochs": 15,
+  "epochs_trained": 12,
+  "momentum": 0.0,
+  "weight_decay": 0.0,
+  "early_stopping_patience": 4,
+  "early_stopping_metric": "val_accuracy"
 }
