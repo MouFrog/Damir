@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "dataset": "Flowers102",
+  "best_experiment_id": "C4",
+  "model_summary": "ResNet18 pretrained, layer4+fc",
+  "train_transform": "resnet_transform",
+  "eval_transform": "resnet_transform",
+  "optimizer": "Adam",
+  "lr": 0.0003,
+  "epochs": 2,
+  "best_epoch": 2,
+  "best_val_accuracy": 0.8647058823529412,
+  "test_accuracy": 0.8440396812489835,
+  "device": "cpu"
+}

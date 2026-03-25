@@ -1,0 +1,7 @@
+experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_val_accuracy,test_accuracy,precision,recall,mean_iou,notes
+C1,classification,Flowers102,42,SimpleCNN (3 conv blocks),Adam,0.001,4,0.15490196078431373,,,,,train_transform=cnn_base_transform; eval_transform=cnn_base_transform; best_epoch=4
+C2,classification,Flowers102,42,SimpleCNN (3 conv blocks),Adam,0.001,4,0.11470588235294117,,,,,train_transform=cnn_aug_transform; eval_transform=cnn_base_transform; best_epoch=4
+C3,classification,Flowers102,42,"ResNet18 pretrained, head-only",Adam,0.001,2,0.5274509803921569,,,,,train_transform=resnet_transform; eval_transform=resnet_transform; best_epoch=2
+C4,classification,Flowers102,42,"ResNet18 pretrained, layer4+fc",Adam,0.0003,2,0.8647058823529412,0.8440396812489835,,,,train_transform=resnet_transform; eval_transform=resnet_transform; best_epoch=2
+V1,segmentation,OxfordIIITPet,42,DeepLabV3-ResNet50 pretrained (COCO_WITH_VOC_LABELS_V1),,,0,,,0.9531658435709998,0.9880239763050838,0.9424284353391428,"foreground=pet(mask==1), ignore=border(mask==3), pred_foreground=cat_or_dog_prob>=0.35"
+V2,segmentation,OxfordIIITPet,42,DeepLabV3-ResNet50 pretrained (COCO_WITH_VOC_LABELS_V1),,,0,,,0.9759597417676305,0.9681933111833627,0.9443814576306678,"foreground=pet(mask==1), ignore=border(mask==3), pred_foreground=cat_or_dog_prob>=0.65"
