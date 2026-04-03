@@ -1,0 +1,2 @@
+dataset,inference_model,finetune_model,train_size,validation_size,test_size,max_length,train_batch_size,eval_batch_size,num_epochs,learning_rate,test_accuracy,test_f1_macro
+emotion,distilbert-base-uncased-finetuned-sst-2-english,distilbert-base-uncased,1200,400,400,96,16,32,1,3e-05,0.6225,0.24410112359550562
