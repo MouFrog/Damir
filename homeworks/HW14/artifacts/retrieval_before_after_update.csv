@@ -1,0 +1,6 @@
+query,before_retrieved_sources,after_retrieved_sources,changed
+Что такое guardrails в LLM-приложениях и где их ставят?,ml_metrics|ml_docker,llm_guardrails|ml_metrics,True
+"Когда в проде лучше использовать pgvector, а не FAISS?",grounded_answers|ml_docker,vector_db_pgvector|grounded_answers,True
+Как отслеживать concept drift после релиза модели?,data_leakage|model_monitoring|feature_store,concept_drift|data_leakage|model_monitoring,True
+Как бороться с training-serving skew в продакшене?,feature_store|regularization|pandas_joins,feature_store|concept_drift|regularization,True
+Почему при дисбалансе классов PR-AUC часто полезнее accuracy?,ml_metrics|sklearn_cv,ml_metrics|llm_guardrails,True

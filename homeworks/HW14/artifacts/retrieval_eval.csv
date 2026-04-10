@@ -1,0 +1,11 @@
+query,expected_source,retrieved_sources,hit_at_k,recall_at_k,rank_of_first_relevant
+Как в pandas объединить две таблицы по user_id и сохранить все строки из левой таблицы?,pandas_joins,pandas_joins,1,1.0,1
+Зачем нужна кросс-валидация при подборе гиперпараметров модели?,sklearn_cv,sklearn_cv,1,1.0,1
+Почему accuracy плохо подходит при сильном дисбалансе классов?,ml_metrics,ml_metrics|sklearn_cv|pandas_joins,1,1.0,1
+Какие методы помогают уменьшить переобучение?,regularization,regularization|faiss_intro|grounded_answers,1,1.0,1
+Что дает Docker в ML-проекте и деплое?,ml_docker,ml_docker|ab_testing|ml_metrics,1,1.0,1
+Зачем нужен feature store и как он связан с training-serving skew?,feature_store,feature_store|pandas_joins,1,1.0,1
+Как корректно организовать A/B-тест для ML-рекомендателя?,ab_testing,ml_docker|sklearn_cv|ab_testing,1,1.0,3
+"Что мониторить у модели после релиза, чтобы не пропустить деградацию?",model_monitoring|ml_metrics,model_monitoring|data_leakage|ml_metrics,1,1.0,1
+Когда в RAG используют FAISS и зачем нормировать векторы?,faiss_intro|rag_context,faiss_intro|sklearn_cv,1,0.5,1
+Что такое data leakage и почему он опасен для offline-метрик?,data_leakage,data_leakage|ml_docker|regularization,1,1.0,1
