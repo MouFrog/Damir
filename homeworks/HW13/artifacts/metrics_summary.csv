@@ -1,2 +1,2 @@
-dataset,inference_model,finetune_model,train_size,validation_size,test_size,max_length,train_batch_size,eval_batch_size,num_epochs,learning_rate,test_accuracy,test_f1_macro
-emotion,distilbert-base-uncased-finetuned-sst-2-english,distilbert-base-uncased,1200,400,400,96,16,32,1,3e-05,0.6225,0.24410112359550562
+dataset,inference_model,finetune_model,train_size,validation_size,test_size,max_length,train_batch_size,eval_batch_size,num_epochs,selected_variant,selected_learning_rate,best_validation_accuracy,best_validation_f1_macro,test_accuracy,test_f1_macro
+emotion,distilbert-base-uncased-finetuned-sst-2-english,distilbert-base-uncased,1200,400,400,96,16,32,1,lr_5e-5,5e-05,0.575,0.2823151853325536,0.6675,0.30154946130333865
